@@ -4,14 +4,19 @@
   },
   "scripts": {
     "build": "vite build",
+    "predeploy" : "npm run build",
+    "deploy" : "gh-pages -d dist",
     "preview": "vite preview --port 8080"
   },
   "devDependencies": {
     "cssnano": "^7.0.6",
+    "gh-pages": "^6.1.1",
     "postcss": "^8.4.45",
     "vite": "^5.4.3"
   },
   "name": "threepractice",
+  "homepage": "https://webdevedd.github.io/MESX/",
+  "type": "module",
   "version": "1.0.0",
   "main": "main.js",
   "author": "",
