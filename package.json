@@ -1,6 +1,20 @@
 {
   "dependencies": {
-    "three": "^0.168.0",
+    "three": "^0.168.0"
+  },
+  "scripts": {
+    "build": "vite build",
+    "preview": "vite preview --port 8080"
+  },
+  "devDependencies": {
+    "cssnano": "^7.0.6",
+    "postcss": "^8.4.45",
     "vite": "^5.4.3"
-  }
+  },
+  "name": "threepractice",
+  "version": "1.0.0",
+  "main": "main.js",
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }
