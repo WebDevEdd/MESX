@@ -33,10 +33,10 @@ const controls = new OrbitControls( camera, renderer.domElement );
 
 const loader = new OBJLoader();
 const mtlLoader = new MTLLoader();
-mtlLoader.load('/OBJfiles/structure v1.mtl', (materials) => {
+mtlLoader.load('/MTLfiles/structurev1.mtl', (materials) => {
       materials.preload();
       loader.setMaterials(materials);
-      loader.load( '/OBJfiles/structure v1.obj', (object) => {
+      loader.load( '/OBJfiles/structurev1.obj', (object) => {
 
 
             scene.add( object );
