@@ -40,13 +40,13 @@ mtlLoader.load('/MESX/MTLfiles/structurev1.mtl', (materials) => {
 
 
             scene.add( object );
-            //const allComponents = getAllComponents()
-            //addToComponentList(allComponents);
+            const allComponents = getAllComponents()
+            addToComponentList(allComponents);
 
-            //container.addEventListener('click', () => {
-            //      toggleVisibility(allComponents);
-            //})
-            //console.log(allComponents)
+            container.addEventListener('click', () => {
+                  toggleVisibility(allComponents);
+            })
+            console.log(allComponents)
             
 
       },
