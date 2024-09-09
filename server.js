@@ -23,7 +23,7 @@ app.get('/Jobs', (req, res) => {
 mongoose.connect('mongodb+srv://WebDevEdd:password123456@cluster0.tpckn.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
 .then(() => {
       console.log('connected to MongoDB');
-      app.listen(8080, () => {
+      app.listen(3000, () => {
             console.log('NODE API app is running on port 8080');
       })
 }).catch((error) => {
