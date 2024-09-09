@@ -20,6 +20,7 @@ app.get('/Jobs', (req, res) => {
 })
 
 
+
 mongoose.connect('mongodb+srv://WebDevEdd:password123456@cluster0.tpckn.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
 .then(() => {
       console.log('connected to MongoDB');

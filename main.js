@@ -9,7 +9,7 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 const viewer = document.querySelector('#viewer-container');
 const scene = new THREE.Scene();
-scene.background = new THREE.Color(0xFFF5E1);
+scene.background = new THREE.Color(0xF0FCFF);
 const camera = new THREE.PerspectiveCamera( 75, viewer.offsetWidth/viewer.offsetHeight, 0.1, 1000 );
 
 
@@ -20,7 +20,7 @@ scene.add( dl );
 scene.add( light );
 
 
-const container = document.querySelector('.components-list');
+const container = document.querySelectorAll('.components-list');
 
 
 
@@ -34,20 +34,22 @@ const controls = new OrbitControls( camera, renderer.domElement );
 
 const loader = new OBJLoader();
 const mtlLoader = new MTLLoader();
-mtlLoader.load('assets/MTLfiles/structurev1.mtl', (materials) => {
+mtlLoader.load('assets/MTLfiles/ModelAirv7.mtl', (materials) => {
       materials.preload();
       loader.setMaterials(materials);
-      loader.load( 'assets/OBJfiles/structurev1.obj', (object) => {
+      loader.load( 'assets/OBJfiles/ModelAirv7.obj', (object) => {
 
 
             scene.add( object );
             const allComponents = getAllComponents()
-            addToComponentList(allComponents);
-
-            container.addEventListener('click', () => {
-                  toggleVisibility(allComponents);
+            //addToComponentList(allComponents);
+            separateParts(allComponents)
+            container.forEach((e) => {
+                  e.addEventListener('click', () => {
+                        toggleVisibility(allComponents);
+                  })
             })
-
+            
             
 
       },
@@ -61,13 +63,12 @@ mtlLoader.load('assets/MTLfiles/structurev1.mtl', (materials) => {
       })
 })
 
-camera.position.z = 25;
+camera.position.z = 8;
 controls.update();
 
 function animate() {
 	renderer.render( scene, camera );
 }
-
 const getAllComponents = () => {
       const allComponents = scene.children.find(item => item.type === 'Group').children
       return allComponents
@@ -80,7 +81,7 @@ const addToComponentList = (components) => {
 
 }
 const createComponent = (el) => {
-      const container = document.querySelector('.components-list');
+      const container = document.querySelector('.structures-list');
       const name = el;
 
       const li = document.createElement('li')
@@ -99,19 +100,43 @@ const createComponent = (el) => {
       li.classList.add('components')
       input.classList.add('component-input')
 }
-
 const toggleVisibility = (objs) => {
       const elList = document.querySelectorAll('.component-input')
       elList.forEach((e) => {
             let com = scene.getObjectByName(e.name)
             if (e.checked){
-                  
                   com.visible = true
-                  console.log(com)
             }else{
                   com.visible = false
-                  console.log(com)
             }
       })
 }
+const separateParts = (list) => {
+      const parts = list;
+      parts.forEach( (e) => {
 
+            if (e.name.split('_')[0] === 'str') {
+                  createComponent(e.name)
+            }else {
+                  let partsList = document.querySelector('.parts-list')
+                  const name = e.name;
+
+                  const li = document.createElement('li')
+                  const label = document.createElement('label')
+                  const input = document.createElement('input')
+
+                  input.type = 'checkbox';
+                  label.name = name;
+                  input.name = name;
+                  label.innerHTML = name;
+
+                  li.appendChild(input)
+                  li.appendChild(label)
+                  partsList.appendChild(li)
+                  input.checked = true;
+                  li.classList.add('components')
+                  input.classList.add('component-input')
+            }
+
+      })
+}

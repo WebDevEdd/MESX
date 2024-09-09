@@ -11,3 +11,11 @@ structuresTitle.addEventListener('click', () => {
             structuresList.classList.add('hidden')
       }
 })
+
+partsTitle.addEventListener('click', () => {
+      if (partsList.classList.contains('hidden')){
+            partsList.classList.remove('hidden')
+      } else {
+            partsList.classList.add('hidden')
+      }
+})
