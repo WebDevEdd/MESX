@@ -1,12 +1,16 @@
 {
   "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "mongodb": "^6.8.1",
+    "mongoose": "^8.6.1",
     "three": "^0.168.0"
   },
   "scripts": {
     "build": "vite build",
     "dev": "vite",
-    "predeploy" : "npm run build",
-    "deploy" : "gh-pages -d dist",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "preview": "vite preview --port 8080"
   },
   "devDependencies": {
@@ -17,7 +21,6 @@
   },
   "name": "threepractice",
   "homepage": "https://webdevedd.github.io/MESX/",
-  "type": "module",
   "version": "1.0.0",
   "main": "main.js",
   "author": "",

@@ -34,10 +34,10 @@ const controls = new OrbitControls( camera, renderer.domElement );
 
 const loader = new OBJLoader();
 const mtlLoader = new MTLLoader();
-mtlLoader.load('/MESX/MTLfiles/structurev1.mtl', (materials) => {
+mtlLoader.load('assets/MTLfiles/structurev1.mtl', (materials) => {
       materials.preload();
       loader.setMaterials(materials);
-      loader.load( '/MESX/OBJfiles/structurev1.obj', (object) => {
+      loader.load( 'assets/OBJfiles/structurev1.obj', (object) => {
 
 
             scene.add( object );
@@ -47,7 +47,7 @@ mtlLoader.load('/MESX/MTLfiles/structurev1.mtl', (materials) => {
             container.addEventListener('click', () => {
                   toggleVisibility(allComponents);
             })
-            console.log(allComponents)
+
             
 
       },
