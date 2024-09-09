@@ -1,10 +1,12 @@
-import express from 'express';
+const express = require('express');
 const app = express();
-import mongoose from 'mongoose';
-import path from 'path';
+const mongoose = require ('mongoose');
+const path = require('path');
 
 
 app.use(express.json())
+
+app.use(express.static(path.join(__dirname, 'src')));
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -14,7 +16,7 @@ app.get('/', ( req, res ) => {
 })
 
 app.get('/Jobs', (req, res) => {
-      res.send('this is the jobs page')
+      res.render('jobs', { title: 'Jobs Page' });
 })
 
 
