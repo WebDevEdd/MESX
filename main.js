@@ -6,7 +6,6 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 
 
-
 const viewer = document.querySelector('#viewer-container');
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0xF0FCFF);
@@ -49,8 +48,9 @@ mtlLoader.load('assets/MTLfiles/ModelAirv7.mtl', (materials) => {
                         toggleVisibility(allComponents);
                   })
             })
+
             
-            
+            dropDownPartTypes();
 
       },
       function (xhr) {
@@ -113,13 +113,17 @@ const toggleVisibility = (objs) => {
 }
 const separateParts = (list) => {
       const parts = list;
+      let partTypes = []
+      let partsList = document.querySelector('.parts-list')
       parts.forEach( (e) => {
 
             if (e.name.split('_')[0] === 'str') {
                   createComponent(e.name)
             }else {
-                  let partsList = document.querySelector('.parts-list')
+                  
                   const name = e.name;
+                  let partType = e.name.split('_')[0];
+                  
 
                   const li = document.createElement('li')
                   const label = document.createElement('label')
@@ -130,13 +134,59 @@ const separateParts = (list) => {
                   input.name = name;
                   label.innerHTML = name;
 
+                  let partTypeContainer = document.createElement('div')
+
+                  if (partTypes.includes(partType) == false){
+                        partTypes.push(partType)
+                        
+                        let partTypeTitle = document.createElement('div')
+
+                        partTypeContainer.classList.add(partType)
+                        partTypeContainer.classList.add("partType")
+                        
+
+                        partTypeTitle.innerHTML = partType;
+                        partTypeTitle.classList.add('part-type-title')
+                        partTypeContainer.appendChild(partTypeTitle)
+                        partsList.appendChild(partTypeContainer)
+                  }
+
+                  partTypes.forEach((e) => {
+                        if ( partType == e){
+                              let eContainer = document.querySelector('.' + partType)
+                              eContainer.appendChild(li)
+                              li.classList.add('hidden')
+                              li.classList.add(partType + 'Li')
+                        }
+                  })
+                  
                   li.appendChild(input)
                   li.appendChild(label)
-                  partsList.appendChild(li)
                   input.checked = true;
                   li.classList.add('components')
                   input.classList.add('component-input')
-            }
+                  
 
+            }
+            
+      })
+}
+const dropDownPartTypes = () => {
+      let allPartTitles = document.querySelectorAll('.partType')
+      let partTitle = document.querySelectorAll('.part-type-title')
+
+
+      partTitle.forEach((e) => {
+            e.addEventListener('click', () => {
+                  let titleName = e.innerHTML;
+                  let className =  titleName + 'Li'
+
+                  let allDivs = document.getElementsByClassName(className)
+
+                  for (let i = 0; i < allDivs.length; i++){
+                        allDivs[i].classList.toggle('hidden')
+                  }
+                 console.log(allDivs)
+            })
       })
 }
